@@ -77,6 +77,36 @@ h6 {
 
 /* BASE */
 
+:root {
+	--primaryColor: oklch(14.5% 0 0);
+	--secondaryColor: oklch(98.5% 0 0);
+	--accentColor: oklch(62.3% 0.214 259.815);
+}
+
 body {
 	font-family: sans-serif;
+	padding: 1rem;
+	color: var(--primaryColor);
+}
+
+.container {
+	max-width: 40rem;
+	margin: 0 auto;
+}
+
+/* HEADER */
+header {
+	display: flex;
+	margin-bottom: 2rem;
+}
+
+header h1 {
+	margin-right: auto;
+}
+
+/* BOOKS */
+.books {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+	gap: 1rem;
 }
