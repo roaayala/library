@@ -1,3 +1,20 @@
+const books = document.querySelector('.books');
+
+const book = document.createElement('div');
+book.classList.add('book');
+
+const bookAuthor = document.createElement('h3');
+bookAuthor.classList.add('book-author');
+
+const bookTitle = document.createElement('h2');
+bookTitle.classList.add('book-title');
+
+book.appendChild(bookAuthor);
+book.appendChild(bookTitle);
+books.appendChild(book);
+
+console.log(books);
+
 const myLibrary = [];
 
 const myLibrarayDummies = [
