@@ -1,5 +1,44 @@
 const myLibrary = [];
 
+const myLibrarayDummies = [
+	{
+		title: 'Modern Front-End Web Development',
+		author: 'Sarah Coder',
+		pages: 320,
+		status: 'Waiting',
+	},
+	{
+		title: 'Personal Finance for Beginners',
+		author: 'John Wealth',
+		pages: 210,
+		status: 'Reading',
+	},
+	{
+		title: 'The 64px Grid: Icon Design Secrets',
+		author: 'Vector Master',
+		pages: 150,
+		status: 'Finish',
+	},
+	{
+		title: 'Ramadan Reflections',
+		author: 'A. Scholar',
+		pages: 120,
+		status: 'Pending',
+	},
+	{
+		title: 'The Olympic Dream',
+		author: 'Sports Writer',
+		pages: 280,
+		status: 'Pending',
+	},
+	{
+		title: 'A Guide to Moving and Living in Klaten',
+		author: 'Indo Traveler',
+		pages: 95,
+		status: 'Finish',
+	},
+];
+
 function Book(title, author, pages, status) {
 	this.title = title;
 	this.author = author;
@@ -12,5 +51,3 @@ function addBookToLibrary() {}
 function generateBookId() {
 	return crypto.randomUUID();
 }
-
-console.log(generateBookId());
