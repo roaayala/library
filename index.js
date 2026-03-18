@@ -8,3 +8,9 @@ function Book(title, author, pages, status) {
 }
 
 function addBookToLibrary() {}
+
+function generateBookId() {
+	return crypto.randomUUID();
+}
+
+console.log(generateBookId());
