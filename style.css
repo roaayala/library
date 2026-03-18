@@ -76,3 +76,7 @@ h6 {
 }
 
 /* BASE */
+
+body {
+	font-family: sans-serif;
+}

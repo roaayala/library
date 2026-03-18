@@ -1,20 +1,5 @@
 const books = document.querySelector('.books');
 
-const book = document.createElement('div');
-book.classList.add('book');
-
-const bookAuthor = document.createElement('h3');
-bookAuthor.classList.add('book-author');
-
-const bookTitle = document.createElement('h2');
-bookTitle.classList.add('book-title');
-
-book.appendChild(bookAuthor);
-book.appendChild(bookTitle);
-books.appendChild(book);
-
-console.log(books);
-
 const myLibrary = [];
 
 const myLibrarayDummies = [
@@ -55,6 +40,33 @@ const myLibrarayDummies = [
 		status: 'Finish',
 	},
 ];
+
+myLibrarayDummies.forEach((book) => {
+	const bookCard = document.createElement('div');
+	bookCard.classList.add('book');
+
+	const bookAuthor = document.createElement('h3');
+	bookAuthor.classList.add('book-author');
+	bookAuthor.textContent = book.author;
+
+	const bookTitle = document.createElement('h2');
+	bookTitle.classList.add('book-title');
+	bookTitle.textContent = book.title;
+
+	const bookPages = document.createElement('p');
+	bookPages.classList.add('book-pages');
+	bookPages.textContent = `${book.pages} pages`;
+
+	const bookReadStatus = document.createElement('span');
+	bookReadStatus.classList.add('book-read-status');
+	bookReadStatus.textContent = book.status;
+
+	bookCard.appendChild(bookAuthor);
+	bookCard.appendChild(bookTitle);
+	bookCard.appendChild(bookPages);
+	bookCard.appendChild(bookReadStatus);
+	books.appendChild(bookCard);
+});
 
 function Book(title, author, pages, status) {
 	this.title = title;
