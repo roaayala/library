@@ -2,7 +2,7 @@ const books = document.querySelector('.books');
 
 const myLibrary = [];
 
-const myLibrarayDummies = [
+const myLibraryA = [
 	{
 		title: 'Modern Front-End Web Development',
 		author: 'Sarah Coder',
@@ -41,32 +41,51 @@ const myLibrarayDummies = [
 	},
 ];
 
-myLibrarayDummies.forEach((book) => {
-	const bookCard = document.createElement('div');
-	bookCard.classList.add('book');
+function conditionalyRenderBooks() {
+	if (myLibrary.length > 0) {
+		renderBooks();
+	} else {
+		renderEmptyBooks();
+	}
+}
 
-	const bookAuthor = document.createElement('h3');
-	bookAuthor.classList.add('book-author');
-	bookAuthor.textContent = book.author;
+conditionalyRenderBooks();
 
-	const bookTitle = document.createElement('h2');
-	bookTitle.classList.add('book-title');
-	bookTitle.textContent = book.title;
+function renderEmptyBooks() {
+	const bookCardEmpty = document.createElement('div');
+	bookCardEmpty.classList.add('book-card-empty');
+	bookCardEmpty.textContent = `There's no book being added.`;
+	books.appendChild(bookCardEmpty);
+}
 
-	const bookPages = document.createElement('p');
-	bookPages.classList.add('book-pages');
-	bookPages.textContent = `${book.pages} pages`;
+function renderBooks() {
+	myLibrary.forEach((book) => {
+		const bookCard = document.createElement('div');
+		bookCard.classList.add('book');
 
-	const bookReadStatus = document.createElement('span');
-	bookReadStatus.classList.add('book-read-status');
-	bookReadStatus.textContent = book.status;
+		const bookAuthor = document.createElement('h3');
+		bookAuthor.classList.add('book-author');
+		bookAuthor.textContent = book.author;
 
-	bookCard.appendChild(bookAuthor);
-	bookCard.appendChild(bookTitle);
-	bookCard.appendChild(bookPages);
-	bookCard.appendChild(bookReadStatus);
-	books.appendChild(bookCard);
-});
+		const bookTitle = document.createElement('h2');
+		bookTitle.classList.add('book-title');
+		bookTitle.textContent = book.title;
+
+		const bookPages = document.createElement('p');
+		bookPages.classList.add('book-pages');
+		bookPages.textContent = `${book.pages} pages`;
+
+		const bookReadStatus = document.createElement('span');
+		bookReadStatus.classList.add('book-read-status');
+		bookReadStatus.textContent = book.status;
+
+		bookCard.appendChild(bookAuthor);
+		bookCard.appendChild(bookTitle);
+		bookCard.appendChild(bookPages);
+		bookCard.appendChild(bookReadStatus);
+		books.appendChild(bookCard);
+	});
+}
 
 function Book(title, author, pages, status) {
 	this.title = title;
