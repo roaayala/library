@@ -11,11 +11,30 @@
 		<dialog id="addBookDialog">
 			<form action="#" class="form">
 				<div class="form-row">
-					<label for="bookTitle">Book Title</label>
+					<label for="bookTitle">Title</label>
 					<input type="text" id="bookTitle" name="bookTitle" />
 				</div>
 
-				<div class="from-row">
+				<div class="form-row">
+					<label for="bookAuthor">Author</label>
+					<input type="text" id="bookAuthor" name="bookAuthor" />
+				</div>
+
+				<div class="form-row">
+					<label for="bookPages">Total pages</label>
+					<input type="number" id="bookPages" name="bookPages" />
+				</div>
+
+				<div class="form-row">
+					<label for="bookStatus">Status</label>
+					<select name="bookStatus" id="bookStatus">
+						<option value="waiting">Waiting</option>
+						<option value="reading">Reading</option>
+						<option value="finish">Finish</option>
+					</select>
+				</div>
+
+				<div class="form-row">
 					<button type="submit" class="btn" id="addBook">Add Book</button>
 					<button type="button" class="btn" id="cancelAddBook">Cancel</button>
 				</div>
