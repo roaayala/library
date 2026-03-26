@@ -1,6 +1,10 @@
 const books = document.querySelector('.books');
 const addBookDialog = document.querySelector('#addBookDialog');
 const showAddBookDialog = document.querySelector('#showAddBookDialog');
+const bookTitleInput = document.querySelector('#bookTitle');
+const bookAuthorInput = document.querySelector('#bookAuthor');
+const bookPagesInput = document.querySelector('#bookPages');
+const bookStatusInput = document.querySelector('#bookStatus');
 const addBook = document.querySelector('#addBook');
 const cancelAddBook = document.querySelector('#cancelAddBook');
 
@@ -10,6 +14,8 @@ showAddBookDialog.addEventListener('click', () => {
 
 addBook.addEventListener('click', (e) => {
 	e.preventDefault();
+	logFormInput();
+	addBookDialog.close();
 });
 
 cancelAddBook.addEventListener('click', () => {
@@ -17,6 +23,13 @@ cancelAddBook.addEventListener('click', () => {
 });
 
 const myLibrary = [];
+
+function logFormInput() {
+	console.log(bookTitleInput.value);
+	console.log(bookAuthorInput.value);
+	console.log(bookPagesInput.value);
+	console.log(bookStatusInput.value);
+}
 
 function conditionalyRenderBooks() {
 	if (myLibrary.length > 0) {
