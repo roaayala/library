@@ -1,4 +1,15 @@
 const books = document.querySelector('.books');
+const addBookDialog = document.querySelector('#addBookDialog');
+const showAddBookDialog = document.querySelector('#showAddBookDialog');
+const cancelAddBook = document.querySelector('#cancelAddBook');
+
+showAddBookDialog.addEventListener('click', () => {
+	addBookDialog.show();
+});
+
+cancelAddBook.addEventListener('click', () => {
+	addBookDialog.close();
+});
 
 const myLibrary = [];
 
