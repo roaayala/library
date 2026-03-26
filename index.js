@@ -15,10 +15,12 @@ showAddBookDialog.addEventListener('click', () => {
 addBook.addEventListener('click', (e) => {
 	e.preventDefault();
 	logFormInput();
+	resetFormInput();
 	addBookDialog.close();
 });
 
 cancelAddBook.addEventListener('click', () => {
+	resetFormInput();
 	addBookDialog.close();
 });
 
@@ -29,6 +31,13 @@ function logFormInput() {
 	console.log(bookAuthorInput.value);
 	console.log(bookPagesInput.value);
 	console.log(bookStatusInput.value);
+}
+
+function resetFormInput() {
+	bookTitleInput.value = null;
+	bookAuthorInput.value = null;
+	bookPagesInput.value = null;
+	bookStatusInput.value = 'waiting';
 }
 
 function conditionalyRenderBooks() {
