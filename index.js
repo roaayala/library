@@ -9,7 +9,9 @@ const addBook = document.querySelector('#addBook');
 const cancelAddBook = document.querySelector('#cancelAddBook');
 
 showAddBookDialog.addEventListener('click', () => {
-	addBookDialog.show();
+	addBookDialog['open'] ? addBookDialog.close() : addBookDialog.show();
+
+	resetFormInput();
 });
 
 addBook.addEventListener('click', (e) => {
