@@ -8,6 +8,8 @@ const bookStatusInput = document.querySelector('#bookStatus');
 const addBook = document.querySelector('#addBook');
 const cancelAddBook = document.querySelector('#cancelAddBook');
 
+const myLibrary = [];
+
 showAddBookDialog.addEventListener('click', () => {
 	addBookDialog['open'] ? addBookDialog.close() : addBookDialog.show();
 
@@ -17,16 +19,22 @@ showAddBookDialog.addEventListener('click', () => {
 addBook.addEventListener('click', (e) => {
 	e.preventDefault();
 	logFormInput();
+	addBookToLibrary(
+		bookTitleInput.value,
+		bookAuthorInput.value,
+		bookPagesInput.value,
+		bookStatusInput.value,
+	);
 	resetFormInput();
 	addBookDialog.close();
+	books.innerHTML = '';
+	conditionalyRenderBooks();
 });
 
 cancelAddBook.addEventListener('click', () => {
 	resetFormInput();
 	addBookDialog.close();
 });
-
-const myLibrary = [];
 
 function logFormInput() {
 	console.log(bookTitleInput.value);
@@ -96,7 +104,11 @@ function Book(id, title, author, pages, status) {
 	this.status = status;
 }
 
-function addBookToLibrary() {}
+function addBookToLibrary(title, author, pages, status) {
+	const book = new Book(generateBookId(), title, author, pages, status);
+	// console.log(book);
+	myLibrary.push(book);
+}
 
 function generateBookId() {
 	return crypto.randomUUID();
