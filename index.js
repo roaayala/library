@@ -100,7 +100,15 @@ function renderBooks() {
 			const bookId =
 				e.target.parentElement.parentElement.getAttribute('book-id');
 
-			console.log(bookId);
+			const bookIndex = myLibrary.indexOf(book);
+
+			if (bookIndex > -1) {
+				myLibrary.splice(bookIndex, 1);
+				books.innerHTML = '';
+				conditionalyRenderBooks();
+			}
+
+			// console.log(bookId, bookIndex);
 		});
 
 		bookCard.appendChild(bookAuthor);
