@@ -71,7 +71,7 @@ function renderBooks() {
 	myLibrary.forEach((book) => {
 		const bookCard = document.createElement('div');
 		bookCard.classList.add('book');
-		bookCard.dataset.bookId = book.id;
+		bookCard.setAttribute('book-id', book.id);
 
 		const bookAuthor = document.createElement('h3');
 		bookAuthor.classList.add('book-author');
