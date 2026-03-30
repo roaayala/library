@@ -135,7 +135,8 @@ dialog {
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-
+	max-width: 30rem;
+	min-width: 20rem;
 	padding: 2rem;
 	border: none;
 	border-radius: 8px;
@@ -147,6 +148,26 @@ dialog {
 
 .dialog::backdrop {
 	background-color: hsl(250, 100%, 50%, 0.25);
+}
+
+.form {
+}
+
+.form-row {
+	display: flex;
+	flex-direction: column;
+}
+
+.form-row:not(:last-child) {
+	margin-bottom: 1rem;
+}
+
+.form-row input {
+	padding: 0.25rem 0.5rem;
+}
+
+.form select {
+	padding: 0.25rem 0.5rem;
 }
 
 /* HEADER */
