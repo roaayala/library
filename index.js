@@ -18,7 +18,7 @@ showAddBookDialog.addEventListener('click', () => {
 
 addBook.addEventListener('click', (e) => {
 	e.preventDefault();
-	logFormInput();
+	// logFormInput();
 	addBookToLibrary(
 		bookTitleInput.value,
 		bookAuthorInput.value,
@@ -71,6 +71,7 @@ function renderBooks() {
 	myLibrary.forEach((book) => {
 		const bookCard = document.createElement('div');
 		bookCard.classList.add('book');
+		bookCard.dataset.bookId = book.id;
 
 		const bookAuthor = document.createElement('h3');
 		bookAuthor.classList.add('book-author');
