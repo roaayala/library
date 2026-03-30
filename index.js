@@ -89,10 +89,28 @@ function renderBooks() {
 		bookReadStatus.classList.add('book-read-status');
 		bookReadStatus.textContent = book.status;
 
+		const bookCardActions = document.createElement('div');
+		bookCardActions.classList.add('book-card-actions');
+
+		const actionDelete = document.createElement('button');
+		actionDelete.classList.add('action-delete');
+		actionDelete.textContent = 'Delete';
+
+		actionDelete.addEventListener('click', (e) => {
+			const bookId =
+				e.target.parentElement.parentElement.getAttribute('book-id');
+
+			console.log(bookId);
+		});
+
 		bookCard.appendChild(bookAuthor);
 		bookCard.appendChild(bookTitle);
 		bookCard.appendChild(bookPages);
 		bookCard.appendChild(bookReadStatus);
+
+		bookCard.appendChild(bookCardActions);
+		bookCardActions.appendChild(actionDelete);
+
 		books.appendChild(bookCard);
 	});
 }
