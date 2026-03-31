@@ -46,7 +46,15 @@ cancelAddBook.addEventListener('click', () => {
 
 editBook.addEventListener('click', (e) => {
 	e.preventDefault();
-	console.log(editBookDialog.getAttribute('book-id'));
+	// console.log(editBookDialog.getAttribute('book-id'));
+	const bookId = editBookDialog.getAttribute('book-id');
+	editBookToLibrary(
+		bookId,
+		editBookTitleInput,
+		editBookAuthorInput,
+		editBookPagesInput,
+		editBookStatusInput,
+	);
 });
 
 cancelEditBook.addEventListener('click', () => {
@@ -172,6 +180,14 @@ function addBookToLibrary(title, author, pages, status) {
 	const book = new Book(generateBookId(), title, author, pages, status);
 	// console.log(book);
 	myLibrary.push(book);
+}
+
+function editBookToLibrary(id, title, author, pages, status) {
+	const editedBook = new Book(id, title, author, pages, status);
+
+	const bookIndex = myLibrary.findIndex((book) => book.id === editedBook.id);
+
+	console.log(bookIndex);
 }
 
 function generateBookId() {
