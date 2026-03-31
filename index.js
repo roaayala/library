@@ -7,6 +7,14 @@ const bookPagesInput = document.querySelector('#bookPages');
 const bookStatusInput = document.querySelector('#bookStatus');
 const addBook = document.querySelector('#addBook');
 const cancelAddBook = document.querySelector('#cancelAddBook');
+const editBookDialog = document.querySelector('#editBookDialog');
+const showEditBookDialog = document.querySelector('#showEditBookDialog');
+const editBookTitleInput = document.querySelector('#editBookTitle');
+const editBookAuthorInput = document.querySelector('#editBookAuthor');
+const editBookPagesInput = document.querySelector('#editBookPages');
+const editBookStatusInput = document.querySelector('#editBookStatus');
+const editBook = document.querySelector('#editBook');
+const cancelEditBook = document.querySelector('#cancelEditBook');
 
 const myLibrary = [];
 
@@ -34,6 +42,11 @@ addBook.addEventListener('click', (e) => {
 cancelAddBook.addEventListener('click', () => {
 	resetFormInput();
 	addBookDialog.close();
+});
+
+cancelEditBook.addEventListener('click', () => {
+	resetFormInput();
+	editBookDialog.close();
 });
 
 function logFormInput() {
@@ -95,6 +108,10 @@ function renderBooks() {
 		const actionEdit = document.createElement('button');
 		actionEdit.classList.add('action-edit');
 		actionEdit.textContent = 'Edit';
+
+		actionEdit.addEventListener('click', () => {
+			editBookDialog['open'] ? editBookDialog.close() : editBookDialog.show();
+		});
 
 		const actionDelete = document.createElement('button');
 		actionDelete.classList.add('action-delete');
