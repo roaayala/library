@@ -92,6 +92,10 @@ function renderBooks() {
 		const bookCardActions = document.createElement('div');
 		bookCardActions.classList.add('book-card-actions');
 
+		const actionEdit = document.createElement('button');
+		actionEdit.classList.add('action-edit');
+		actionEdit.textContent = 'Edit';
+
 		const actionDelete = document.createElement('button');
 		actionDelete.classList.add('action-delete');
 		actionDelete.textContent = 'Delete';
@@ -117,6 +121,7 @@ function renderBooks() {
 		bookCard.appendChild(bookReadStatus);
 
 		bookCard.appendChild(bookCardActions);
+		bookCardActions.appendChild(actionEdit);
 		bookCardActions.appendChild(actionDelete);
 
 		books.appendChild(bookCard);
