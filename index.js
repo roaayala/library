@@ -44,6 +44,10 @@ cancelAddBook.addEventListener('click', () => {
 	addBookDialog.close();
 });
 
+editBook.addEventListener('click', (e) => {
+	e.preventDefault();
+});
+
 cancelEditBook.addEventListener('click', () => {
 	resetFormInput();
 	editBookDialog.close();
@@ -110,7 +114,15 @@ function renderBooks() {
 		actionEdit.textContent = 'Edit';
 
 		actionEdit.addEventListener('click', () => {
-			editBookDialog['open'] ? editBookDialog.close() : editBookDialog.show();
+			if (editBookDialog['open']) {
+				editBookDialog.close();
+			} else {
+				editBookDialog.show();
+				editBookTitleInput.value = book.title;
+				editBookAuthorInput.value = book.author;
+				editBookPagesInput.value = book.pages;
+				editBookStatusInput.value = book.status;
+			}
 		});
 
 		const actionDelete = document.createElement('button');
