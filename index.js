@@ -97,8 +97,8 @@ function renderBooks() {
 		actionDelete.textContent = 'Delete';
 
 		actionDelete.addEventListener('click', (e) => {
-			const bookId =
-				e.target.parentElement.parentElement.getAttribute('book-id');
+			// const bookId =
+			// 	e.target.parentElement.parentElement.getAttribute('book-id');
 
 			const bookIndex = myLibrary.indexOf(book);
 
@@ -108,7 +108,7 @@ function renderBooks() {
 				conditionalyRenderBooks();
 			}
 
-			// console.log(bookId, bookIndex);
+			// console.log(bookIndex);
 		});
 
 		bookCard.appendChild(bookAuthor);
