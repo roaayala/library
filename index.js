@@ -46,6 +46,7 @@ cancelAddBook.addEventListener('click', () => {
 
 editBook.addEventListener('click', (e) => {
 	e.preventDefault();
+	console.log(editBookDialog.getAttribute('book-id'));
 });
 
 cancelEditBook.addEventListener('click', () => {
@@ -118,6 +119,8 @@ function renderBooks() {
 				editBookDialog.close();
 			} else {
 				editBookDialog.show();
+				// console.log(book.id);
+				editBookDialog.setAttribute('book-id', book.id);
 				editBookTitleInput.value = book.title;
 				editBookAuthorInput.value = book.author;
 				editBookPagesInput.value = book.pages;
