@@ -43,6 +43,43 @@
 			</form>
 		</dialog>
 
+		<dialog class="dialog" id="editBookDialog">
+			<form action="#" method="post" class="form">
+				<div class="form-row">
+					<label for="editBookTitle">Title</label>
+					<input type="text" id="editBookTitle" name="editBookTitle" />
+				</div>
+
+				<div class="form-row">
+					<label for="editBookAuthor">Author</label>
+					<input type="text" id="editBookAuthor" name="editBookAuthor" />
+				</div>
+
+				<div class="form-row">
+					<label for="editBookPages">Total pages</label>
+					<input type="number" id="editBookPages" name="editBookPages" />
+				</div>
+
+				<div class="form-row read-status">
+					<label for="editBookStatus">Status</label>
+					<select name="editBookStatus" id="editBookStatus">
+						<option value="waiting">Waiting</option>
+						<option value="reading">Reading</option>
+						<option value="finish">Finish</option>
+					</select>
+				</div>
+
+				<div class="form-row">
+					<div class="buttons">
+						<button type="submit" class="btn" id="editBook">Edit Book</button>
+						<button type="button" class="btn" id="cancelEditBook">
+							Cancel
+						</button>
+					</div>
+				</div>
+			</form>
+		</dialog>
+
 		<header>
 			<div class="container">
 				<div class="header-title">
