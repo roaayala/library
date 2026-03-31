@@ -50,11 +50,16 @@ editBook.addEventListener('click', (e) => {
 	const bookId = editBookDialog.getAttribute('book-id');
 	editBookToLibrary(
 		bookId,
-		editBookTitleInput,
-		editBookAuthorInput,
-		editBookPagesInput,
-		editBookStatusInput,
+		editBookTitleInput.value,
+		editBookAuthorInput.value,
+		editBookPagesInput.value,
+		editBookStatusInput.value,
 	);
+
+	resetFormInput();
+	editBookDialog.close();
+	books.innerHTML = '';
+	conditionalyRenderBooks();
 });
 
 cancelEditBook.addEventListener('click', () => {
@@ -187,7 +192,8 @@ function editBookToLibrary(id, title, author, pages, status) {
 
 	const bookIndex = myLibrary.findIndex((book) => book.id === editedBook.id);
 
-	console.log(bookIndex);
+	// console.log(bookIndex, editedBook);
+	myLibrary[bookIndex] = editedBook;
 }
 
 function generateBookId() {
