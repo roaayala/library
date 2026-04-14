@@ -199,3 +199,21 @@ function editBookToLibrary(id, title, author, pages, status) {
 function generateBookId() {
 	return crypto.randomUUID();
 }
+
+class Library {}
+
+class Book {
+	constructor(title, author, pages, status) {
+		this.id = crypto.randomUUID();
+		this.title = title;
+		this.author = author;
+		this.pages = pages;
+		this.status = status;
+	}
+}
+
+class FormHandler {}
+
+class DialogManager {}
+
+class BookRenderer {}
