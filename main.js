@@ -23,9 +23,7 @@ class DialogManager {
 		this.editDialog = document.querySelector('#editBookDialog');
 
 		this.showAddDialog.addEventListener('click', () => {
-			this.addDialog['open']
-				? this.addDialog.close()
-				: this.addDialog.showModal();
+			this.addDialog.showModal();
 		});
 	}
 }
