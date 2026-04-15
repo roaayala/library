@@ -1,15 +1,23 @@
 class Library {
 	constructor() {
 		this.dialogManager = new DialogManager();
-		this.editForm = new FormHandler('cancelAddBook');
+		this.addForm = new FormHandler(
+			'#bookTitle',
+			'#bookAuthor',
+			'#bookPages',
+			'#bookStatus',
+			'#addBook',
+			'#cancelAddBook',
+		);
 
 		this.init();
 	}
 
 	init() {
 		this.dialogManager.init();
-		this.editForm.onCancel(() => {
+		this.addForm.onCancel(() => {
 			this.dialogManager.closeAddDialog();
+			this.addForm.resetFormInput();
 		});
 	}
 }
@@ -25,14 +33,33 @@ class Book {
 }
 
 class FormHandler {
-	constructor(hideHandler) {
-		this.hideAddDialog = document.querySelector(`#${hideHandler}`);
+	constructor(
+		inputTitle,
+		inputAuhor,
+		inputPages,
+		inputStatus,
+		submitButton,
+		hideButton,
+	) {
+		this.inputTitle = document.querySelector(inputTitle);
+		this.inputAuhor = document.querySelector(inputAuhor);
+		this.inputPages = document.querySelector(inputPages);
+		this.inputStatus = document.querySelector(inputStatus);
+		this.submitButton = document.querySelector(submitButton);
+		this.hideDialog = document.querySelector(hideButton);
 	}
 
 	onCancel(func) {
-		this.hideAddDialog.addEventListener('click', () => {
+		this.hideDialog.addEventListener('click', () => {
 			func();
 		});
+	}
+
+	resetFormInput() {
+		this.inputTitle.value = '';
+		this.inputAuhor.value = '';
+		this.inputPages.value = '';
+		this.inputStatus.value = 'waiting';
 	}
 }
 
