@@ -23,14 +23,36 @@ class Library {
 		this.addForm.onSubmit((data) => {
 			this.library.push(data);
 			this.dialogManager.closeAddDialog();
+
+			this.bookRenderer.booksContainer.innerHTML = '';
+
+			this.library.forEach((book) => {
+				this.bookRenderer.renderBooks(
+					book.id,
+					book.title,
+					book.author,
+					book.pages,
+					book.status,
+				);
+			});
 		});
 
 		this.addForm.onCancel(() => {
 			this.dialogManager.closeAddDialog();
 			this.addForm.resetFormInput();
+			this.bookRenderer.renderBooks();
 		});
 
 		if (this.library.length > 0) {
+			this.library.forEach((book) => {
+				this.bookRenderer.renderBooks(
+					book.id,
+					book.title,
+					book.author,
+					book.pages,
+					book.status,
+				);
+			});
 		} else {
 			this.bookRenderer.empty();
 		}
@@ -120,6 +142,57 @@ class DialogManager {
 class BookRenderer {
 	constructor(container) {
 		this.booksContainer = document.querySelector(container);
+	}
+
+	title(title) {
+		const bookTitle = document.createElement('h2');
+		bookTitle.classList.add('book-title');
+		bookTitle.textContent = title;
+
+		return bookTitle;
+	}
+
+	author(author) {
+		const bookAuthor = document.createElement('h3');
+		bookAuthor.classList.add('book-author');
+		bookAuthor.textContent = author;
+
+		return bookAuthor;
+	}
+
+	pages(pages) {
+		const bookPages = document.createElement('p');
+		bookPages.classList.add('book-pages');
+		bookPages.textContent = `${pages} pages`;
+
+		return bookPages;
+	}
+
+	status(status) {
+		const bookStatus = document.createElement('span');
+		bookStatus.classList.add('book-read-status');
+		bookStatus.textContent = status;
+
+		return bookStatus;
+	}
+
+	book(id, title, author, pages, status) {
+		const book = document.createElement('div');
+		book.classList.add('book');
+		book.setAttribute('book-id', id);
+
+		book.appendChild(this.author(author));
+		book.appendChild(this.title(title));
+		book.appendChild(this.pages(pages));
+		book.appendChild(this.status(status));
+
+		return book;
+	}
+
+	renderBooks(id, title, author, pages, status) {
+		this.booksContainer.appendChild(
+			this.book(id, title, author, pages, status),
+		);
 	}
 
 	empty() {
