@@ -28,11 +28,7 @@ class Library {
 
 			this.dialogManager.closeAddDialog();
 
-			this.bookRenderer.clearShelf();
-
-			this.library.forEach((book) => {
-				this.bookRenderer.renderBook(book);
-			});
+			this.bookRenderer.renderAllBooks(this.library);
 		});
 
 		this.addForm.onCancel(() => {
@@ -188,6 +184,14 @@ class BookRenderer {
 
 	renderBook(bookObject) {
 		this.booksContainer.appendChild(this.book(bookObject));
+	}
+
+	renderAllBooks(libraryArray) {
+		this.clearShelf();
+
+		libraryArray.forEach((book) => {
+			this.renderBook(book);
+		});
 	}
 
 	showEmptyMessage() {
