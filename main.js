@@ -36,19 +36,7 @@ class Library {
 			this.addForm.resetFormInput();
 		});
 
-		if (this.library.length > 0) {
-			this.library.forEach((book) => {
-				this.bookRenderer.renderBook(
-					book.id,
-					book.title,
-					book.author,
-					book.pages,
-					book.status,
-				);
-			});
-		} else {
-			this.bookRenderer.showEmptyMessage();
-		}
+		this.bookRenderer.renderAllBooks(this.library);
 	}
 }
 
@@ -188,6 +176,11 @@ class BookRenderer {
 
 	renderAllBooks(libraryArray) {
 		this.clearShelf();
+
+		if (libraryArray.length === 0) {
+			this.showEmptyMessage();
+			return;
+		}
 
 		libraryArray.forEach((book) => {
 			this.renderBook(book);
