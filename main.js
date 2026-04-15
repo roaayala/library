@@ -28,16 +28,10 @@ class Library {
 
 			this.dialogManager.closeAddDialog();
 
-			this.bookRenderer.booksContainer.innerHTML = '';
+			this.bookRenderer.clearShelf();
 
 			this.library.forEach((book) => {
-				this.bookRenderer.renderBook(
-					book.id,
-					book.title,
-					book.author,
-					book.pages,
-					book.status,
-				);
+				this.bookRenderer.renderBook(book);
 			});
 		});
 
@@ -57,7 +51,7 @@ class Library {
 				);
 			});
 		} else {
-			this.bookRenderer.empty();
+			this.bookRenderer.showEmptyMessage();
 		}
 	}
 }
@@ -196,7 +190,7 @@ class BookRenderer {
 		this.booksContainer.appendChild(this.book(bookObject));
 	}
 
-	empty() {
+	showEmptyMessage() {
 		const emptyBook = document.createElement('div');
 
 		emptyBook.classList.add('book-card-empty');
@@ -204,6 +198,10 @@ class BookRenderer {
 		emptyBook.textContent = `There's no book being added.`;
 
 		this.booksContainer.appendChild(emptyBook);
+	}
+
+	clearShelf() {
+		this.booksContainer.innerHTML = '';
 	}
 }
 
