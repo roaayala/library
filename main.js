@@ -31,7 +31,7 @@ class Library {
 			this.bookRenderer.booksContainer.innerHTML = '';
 
 			this.library.forEach((book) => {
-				this.bookRenderer.renderBooks(
+				this.bookRenderer.renderBook(
 					book.id,
 					book.title,
 					book.author,
@@ -44,12 +44,11 @@ class Library {
 		this.addForm.onCancel(() => {
 			this.dialogManager.closeAddDialog();
 			this.addForm.resetFormInput();
-			this.bookRenderer.renderBooks();
 		});
 
 		if (this.library.length > 0) {
 			this.library.forEach((book) => {
-				this.bookRenderer.renderBooks(
+				this.bookRenderer.renderBook(
 					book.id,
 					book.title,
 					book.author,
@@ -148,7 +147,7 @@ class BookRenderer {
 		this.booksContainer = document.querySelector(container);
 	}
 
-	title(title) {
+	createTitle(title) {
 		const bookTitle = document.createElement('h2');
 		bookTitle.classList.add('book-title');
 		bookTitle.textContent = title;
@@ -156,7 +155,7 @@ class BookRenderer {
 		return bookTitle;
 	}
 
-	author(author) {
+	createAuthor(author) {
 		const bookAuthor = document.createElement('h3');
 		bookAuthor.classList.add('book-author');
 		bookAuthor.textContent = author;
@@ -164,7 +163,7 @@ class BookRenderer {
 		return bookAuthor;
 	}
 
-	pages(pages) {
+	createPages(pages) {
 		const bookPages = document.createElement('p');
 		bookPages.classList.add('book-pages');
 		bookPages.textContent = `${pages} pages`;
@@ -172,7 +171,7 @@ class BookRenderer {
 		return bookPages;
 	}
 
-	status(status) {
+	createStatus(status) {
 		const bookStatus = document.createElement('span');
 		bookStatus.classList.add('book-read-status');
 		bookStatus.textContent = status;
@@ -180,23 +179,21 @@ class BookRenderer {
 		return bookStatus;
 	}
 
-	book(id, title, author, pages, status) {
+	book(bookObject) {
 		const book = document.createElement('div');
 		book.classList.add('book');
-		book.setAttribute('book-id', id);
+		book.setAttribute('book-id', bookObject.id);
 
-		book.appendChild(this.author(author));
-		book.appendChild(this.title(title));
-		book.appendChild(this.pages(pages));
-		book.appendChild(this.status(status));
+		book.appendChild(this.createAuthor(bookObject.author));
+		book.appendChild(this.createTitle(bookObject.title));
+		book.appendChild(this.createPages(bookObject.pages));
+		book.appendChild(this.createStatus(bookObject.status));
 
 		return book;
 	}
 
-	renderBooks(id, title, author, pages, status) {
-		this.booksContainer.appendChild(
-			this.book(id, title, author, pages, status),
-		);
+	renderBook(bookObject) {
+		this.booksContainer.appendChild(this.book(bookObject));
 	}
 
 	empty() {
