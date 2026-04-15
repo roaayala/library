@@ -15,6 +15,10 @@ class Library {
 
 	init() {
 		this.dialogManager.init();
+		this.addForm.onSubmit(() => {
+			console.log(this.addForm.getFormsData());
+		});
+
 		this.addForm.onCancel(() => {
 			this.dialogManager.closeAddDialog();
 			this.addForm.resetFormInput();
@@ -35,18 +39,35 @@ class Book {
 class FormHandler {
 	constructor(
 		inputTitle,
-		inputAuhor,
+		inputAuthor,
 		inputPages,
 		inputStatus,
 		submitButton,
 		hideButton,
 	) {
 		this.inputTitle = document.querySelector(inputTitle);
-		this.inputAuhor = document.querySelector(inputAuhor);
+		this.inputAuthor = document.querySelector(inputAuthor);
 		this.inputPages = document.querySelector(inputPages);
 		this.inputStatus = document.querySelector(inputStatus);
+
 		this.submitButton = document.querySelector(submitButton);
 		this.hideDialog = document.querySelector(hideButton);
+	}
+
+	getFormsData() {
+		return {
+			title: this.inputTitle.value,
+			author: this.inputAuthor.value,
+			pages: this.inputPages.value,
+			status: this.inputStatus.value,
+		};
+	}
+
+	onSubmit(func) {
+		this.submitButton.addEventListener('click', (e) => {
+			e.preventDefault();
+			func();
+		});
 	}
 
 	onCancel(func) {
@@ -57,7 +78,7 @@ class FormHandler {
 
 	resetFormInput() {
 		this.inputTitle.value = '';
-		this.inputAuhor.value = '';
+		this.inputAuthor.value = '';
 		this.inputPages.value = '';
 		this.inputStatus.value = 'waiting';
 	}
