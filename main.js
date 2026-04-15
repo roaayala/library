@@ -1,12 +1,16 @@
 class Library {
 	constructor() {
 		this.dialogManager = new DialogManager();
+		this.formHandler = new FormHandler();
 
 		this.init();
 	}
 
 	init() {
 		this.dialogManager.init();
+		this.formHandler.onCancel(() => {
+			this.dialogManager.closeAddDialog();
+		});
 	}
 }
 
@@ -20,7 +24,17 @@ class Book {
 	}
 }
 
-class FormHandler {}
+class FormHandler {
+	constructor() {
+		this.hideAddDialog = document.querySelector('#cancelAddBook');
+	}
+
+	onCancel(func) {
+		this.hideAddDialog.addEventListener('click', () => {
+			func();
+		});
+	}
+}
 
 class DialogManager {
 	constructor() {
@@ -32,6 +46,10 @@ class DialogManager {
 		this.showAddDialog.addEventListener('click', () => {
 			this.addDialog.showModal();
 		});
+	}
+
+	closeAddDialog() {
+		this.addDialog.close();
 	}
 }
 
