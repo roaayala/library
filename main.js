@@ -1,14 +1,14 @@
 class Library {
 	constructor() {
 		this.dialogManager = new DialogManager();
-		this.formHandler = new FormHandler();
+		this.editForm = new FormHandler('cancelAddBook');
 
 		this.init();
 	}
 
 	init() {
 		this.dialogManager.init();
-		this.formHandler.onCancel(() => {
+		this.editForm.onCancel(() => {
 			this.dialogManager.closeAddDialog();
 		});
 	}
@@ -25,8 +25,8 @@ class Book {
 }
 
 class FormHandler {
-	constructor() {
-		this.hideAddDialog = document.querySelector('#cancelAddBook');
+	constructor(hideHandler) {
+		this.hideAddDialog = document.querySelector(`#${hideHandler}`);
 	}
 
 	onCancel(func) {
