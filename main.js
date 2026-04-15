@@ -20,8 +20,12 @@ class Library {
 
 	init() {
 		this.dialogManager.init();
+
 		this.addForm.onSubmit((data) => {
-			this.library.push(data);
+			const book = new Book(data.title, data.author, data.pages, data.status);
+
+			this.library.push(book);
+
 			this.dialogManager.closeAddDialog();
 
 			this.bookRenderer.booksContainer.innerHTML = '';
