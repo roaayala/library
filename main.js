@@ -1,6 +1,9 @@
 class Library {
 	constructor() {
+		this.Library = [];
+
 		this.dialogManager = new DialogManager();
+
 		this.addForm = new FormHandler(
 			'#bookTitle',
 			'#bookAuthor',
@@ -15,8 +18,8 @@ class Library {
 
 	init() {
 		this.dialogManager.init();
-		this.addForm.onSubmit(() => {
-			console.log(this.addForm.getFormsData());
+		this.addForm.onSubmit((data) => {
+			console.log(data);
 		});
 
 		this.addForm.onCancel(() => {
@@ -54,7 +57,7 @@ class FormHandler {
 		this.hideDialog = document.querySelector(hideButton);
 	}
 
-	getFormsData() {
+	getFormData() {
 		return {
 			title: this.inputTitle.value,
 			author: this.inputAuthor.value,
@@ -66,7 +69,12 @@ class FormHandler {
 	onSubmit(func) {
 		this.submitButton.addEventListener('click', (e) => {
 			e.preventDefault();
-			func();
+
+			const data = this.getFormData();
+
+			func(data);
+
+			this.resetFormInput();
 		});
 	}
 
