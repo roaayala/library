@@ -13,6 +13,8 @@ class Library {
 			'#cancelAddBook',
 		);
 
+		this.bookRenderer = new BookRenderer('.books');
+
 		this.init();
 	}
 
@@ -20,7 +22,6 @@ class Library {
 		this.dialogManager.init();
 		this.addForm.onSubmit((data) => {
 			this.library.push(data);
-			console.log(this.library);
 			this.dialogManager.closeAddDialog();
 		});
 
@@ -28,6 +29,11 @@ class Library {
 			this.dialogManager.closeAddDialog();
 			this.addForm.resetFormInput();
 		});
+
+		if (this.library.length > 0) {
+		} else {
+			this.bookRenderer.empty();
+		}
 	}
 }
 
@@ -111,6 +117,20 @@ class DialogManager {
 	}
 }
 
-class BookRenderer {}
+class BookRenderer {
+	constructor(container) {
+		this.booksContainer = document.querySelector(container);
+	}
+
+	empty() {
+		const emptyBook = document.createElement('div');
+
+		emptyBook.classList.add('book-card-empty');
+
+		emptyBook.textContent = `There's no book being added.`;
+
+		this.booksContainer.appendChild(emptyBook);
+	}
+}
 
 const app = new Library();
