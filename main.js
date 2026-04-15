@@ -1,6 +1,6 @@
 class Library {
 	constructor() {
-		this.Library = [];
+		this.library = [];
 
 		this.dialogManager = new DialogManager();
 
@@ -19,7 +19,9 @@ class Library {
 	init() {
 		this.dialogManager.init();
 		this.addForm.onSubmit((data) => {
-			console.log(data);
+			this.library.push(data);
+			console.log(this.library);
+			this.dialogManager.closeAddDialog();
 		});
 
 		this.addForm.onCancel(() => {
