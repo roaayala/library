@@ -1,6 +1,12 @@
 class Library {
 	constructor() {
 		this.dialogManager = new DialogManager();
+
+		this.init();
+	}
+
+	init() {
+		this.dialogManager.init();
 	}
 }
 
@@ -20,8 +26,9 @@ class DialogManager {
 	constructor() {
 		this.addDialog = document.querySelector('#addBookDialog');
 		this.showAddDialog = document.querySelector('#showAddBookDialog');
-		this.editDialog = document.querySelector('#editBookDialog');
+	}
 
+	init() {
 		this.showAddDialog.addEventListener('click', () => {
 			this.addDialog.showModal();
 		});
