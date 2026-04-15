@@ -188,13 +188,13 @@ class BookRenderer {
 	}
 
 	showEmptyMessage() {
-		const emptyBook = document.createElement('div');
+		const emptyMessage = document.createElement('div');
 
-		emptyBook.classList.add('book-card-empty');
+		emptyMessage.classList.add('book-card-empty');
 
-		emptyBook.textContent = `There's no book being added.`;
+		emptyMessage.textContent = `There's no book being added.`;
 
-		this.booksContainer.appendChild(emptyBook);
+		this.booksContainer.appendChild(emptyMessage);
 	}
 
 	clearShelf() {
