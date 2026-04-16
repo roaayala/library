@@ -37,6 +37,10 @@ class Library {
 		});
 
 		this.bookRenderer.renderAllBooks(this.library);
+
+		this.bookRenderer.actionDelete((target) => {
+			console.log(target);
+		});
 	}
 }
 
@@ -209,6 +213,14 @@ class BookRenderer {
 
 		libraryArray.forEach((book) => {
 			this.renderBook(book);
+		});
+	}
+
+	actionDelete(func) {
+		this.booksContainer.addEventListener('click', (e) => {
+			if (e.target.className === 'action-delete') {
+				func(e.target);
+			}
 		});
 	}
 
