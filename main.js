@@ -157,6 +157,30 @@ class BookRenderer {
 		return bookStatus;
 	}
 
+	createButton(style, text) {
+		const actionButton = document.createElement('button');
+
+		actionButton.classList.add(style);
+
+		actionButton.textContent = text;
+
+		return actionButton;
+	}
+
+	createBookActionsContainer() {
+		const bookActionsContainer = document.createElement('div');
+
+		bookActionsContainer.classList.add('book-card-actions');
+
+		bookActionsContainer.appendChild(this.createButton('action-edit', 'Edit'));
+
+		bookActionsContainer.appendChild(
+			this.createButton('action-delete', 'Delete'),
+		);
+
+		return bookActionsContainer;
+	}
+
 	book(bookObject) {
 		const book = document.createElement('div');
 		book.classList.add('book');
@@ -166,6 +190,7 @@ class BookRenderer {
 		book.appendChild(this.createTitle(bookObject.title));
 		book.appendChild(this.createPages(bookObject.pages));
 		book.appendChild(this.createStatus(bookObject.status));
+		book.appendChild(this.createBookActionsContainer());
 
 		return book;
 	}
