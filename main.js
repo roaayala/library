@@ -44,8 +44,9 @@ class Library {
 
 		this.bookRenderer.onActionClick('action-delete', (targetId) => {
 			// exclude book with targeted id
-			console.log('delete');
-			// console.log(this.library.filter((book) => book.id !== targetId));
+			this.library = this.library.filter((book) => book.id !== targetId);
+
+			this.bookRenderer.renderAllBooks(this.library);
 		});
 	}
 }
