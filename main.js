@@ -38,12 +38,14 @@ class Library {
 
 		this.bookRenderer.renderAllBooks(this.library);
 
-		this.bookRenderer.onEditClick((target) => {
-			console.log(target);
+		this.bookRenderer.onActionClick('action-edit', (targetId) => {
+			console.log('edit');
 		});
 
-		this.bookRenderer.onDeleteClick((target) => {
-			console.log(target);
+		this.bookRenderer.onActionClick('action-delete', (targetId) => {
+			// exclude book with targeted id
+			console.log('delete');
+			// console.log(this.library.filter((book) => book.id !== targetId));
 		});
 	}
 }
@@ -220,18 +222,9 @@ class BookRenderer {
 		});
 	}
 
-	onEditClick(func) {
+	onActionClick(targetClassName, func) {
 		this.booksContainer.addEventListener('click', (e) => {
-			if (e.target.className === 'action-edit') {
-				const id = e.target.closest('[book-id]').getAttribute('book-id');
-				func(id);
-			}
-		});
-	}
-
-	onDeleteClick(func) {
-		this.booksContainer.addEventListener('click', (e) => {
-			if (e.target.className === 'action-delete') {
+			if (e.target.classList.contains(targetClassName)) {
 				const id = e.target.closest('[book-id]').getAttribute('book-id');
 				func(id);
 			}
