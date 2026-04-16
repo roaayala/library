@@ -38,7 +38,7 @@ class Library {
 
 		this.bookRenderer.renderAllBooks(this.library);
 
-		this.bookRenderer.OnEditClick((target) => {
+		this.bookRenderer.onEditClick((target) => {
 			console.log(target);
 		});
 
@@ -220,10 +220,11 @@ class BookRenderer {
 		});
 	}
 
-	OnEditClick(func) {
+	onEditClick(func) {
 		this.booksContainer.addEventListener('click', (e) => {
 			if (e.target.className === 'action-edit') {
-				func(e.target);
+				const id = e.target.closest('[book-id]').getAttribute('book-id');
+				func(id);
 			}
 		});
 	}
@@ -231,7 +232,8 @@ class BookRenderer {
 	onDeleteClick(func) {
 		this.booksContainer.addEventListener('click', (e) => {
 			if (e.target.className === 'action-delete') {
-				func(e.target);
+				const id = e.target.closest('[book-id]').getAttribute('book-id');
+				func(id);
 			}
 		});
 	}
