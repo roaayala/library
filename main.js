@@ -1,6 +1,7 @@
 class Library {
 	constructor() {
 		this.library = [];
+		this.editTargetId = null;
 
 		this.dialogManager = new DialogManager();
 
@@ -47,7 +48,6 @@ class Library {
 
 		this.editForm.onSubmit(() => {
 			this.dialogManager.closeEditDialog();
-
 			this.bookRenderer.renderAllBooks(this.library);
 		});
 
@@ -59,6 +59,12 @@ class Library {
 		this.bookRenderer.renderAllBooks(this.library);
 
 		this.bookRenderer.onActionClick('action-edit', (targetId) => {
+			const oldBook = this.library.find((book) => book.id === targetId);
+
+			this.editTargetId = targetId;
+
+			this.editForm.setFormData(oldBook);
+
 			this.dialogManager.openEditDialog();
 		});
 
@@ -97,6 +103,16 @@ class FormHandler {
 
 		this.submitButton = document.querySelector(submitButton);
 		this.hideDialog = document.querySelector(hideButton);
+	}
+
+	setFormData(oldBookObject) {
+		this.inputTitle.value = oldBookObject.title;
+
+		this.inputAuthor.value = oldBookObject.author;
+
+		this.inputPages.value = oldBookObject.pages;
+
+		this.inputStatus.value = oldBookObject.status;
 	}
 
 	getFormData() {
