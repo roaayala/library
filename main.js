@@ -38,7 +38,11 @@ class Library {
 
 		this.bookRenderer.renderAllBooks(this.library);
 
-		this.bookRenderer.actionDelete((target) => {
+		this.bookRenderer.OnEditClick((target) => {
+			console.log(target);
+		});
+
+		this.bookRenderer.onDeleteClick((target) => {
 			console.log(target);
 		});
 	}
@@ -216,7 +220,15 @@ class BookRenderer {
 		});
 	}
 
-	actionDelete(func) {
+	OnEditClick(func) {
+		this.booksContainer.addEventListener('click', (e) => {
+			if (e.target.className === 'action-edit') {
+				func(e.target);
+			}
+		});
+	}
+
+	onDeleteClick(func) {
 		this.booksContainer.addEventListener('click', (e) => {
 			if (e.target.className === 'action-delete') {
 				func(e.target);
