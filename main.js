@@ -45,6 +45,12 @@ class Library {
 			this.addForm.resetFormInput();
 		});
 
+		this.editForm.onSubmit(() => {
+			this.dialogManager.closeEditDialog();
+
+			this.bookRenderer.renderAllBooks(this.library);
+		});
+
 		this.editForm.onCancel(() => {
 			this.dialogManager.closeEditDialog();
 			this.editForm.resetFormInput();
