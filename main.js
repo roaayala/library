@@ -46,7 +46,18 @@ class Library {
 			this.addForm.resetFormInput();
 		});
 
-		this.editForm.onSubmit(() => {
+		this.editForm.onSubmit((data) => {
+			const oldBook = this.library.find(
+				(book) => book.id === this.editTargetId,
+			);
+
+			oldBook.title = data.title;
+			oldBook.author = data.author;
+			oldBook.pages = data.pages;
+			oldBook.status = data.status;
+
+			this.editTargetId = null;
+
 			this.dialogManager.closeEditDialog();
 			this.bookRenderer.renderAllBooks(this.library);
 		});
