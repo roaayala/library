@@ -13,6 +13,15 @@ class Library {
 			'#cancelAddBook',
 		);
 
+		this.editForm = new FormHandler(
+			'#editBookTitle',
+			'#editBookAuthor',
+			'#editBookPages',
+			'#editBookStatus',
+			'#editBook',
+			'#cancelEditBook',
+		);
+
 		this.bookRenderer = new BookRenderer('.books');
 
 		this.init();
@@ -39,7 +48,7 @@ class Library {
 		this.bookRenderer.renderAllBooks(this.library);
 
 		this.bookRenderer.onActionClick('action-edit', (targetId) => {
-			console.log('edit');
+			this.dialogManager.openEditDialog();
 		});
 
 		this.bookRenderer.onActionClick('action-delete', (targetId) => {
@@ -118,12 +127,22 @@ class DialogManager {
 	constructor() {
 		this.addDialog = document.querySelector('#addBookDialog');
 		this.showAddDialog = document.querySelector('#showAddBookDialog');
+
+		this.editDialog = document.querySelector('#editBookDialog');
 	}
 
 	init() {
 		this.showAddDialog.addEventListener('click', () => {
 			this.addDialog.showModal();
 		});
+	}
+
+	openEditDialog() {
+		this.editDialog.showModal();
+	}
+
+	closeEditDialog() {
+		this.editDialog.close();
 	}
 
 	closeAddDialog() {
