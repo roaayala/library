@@ -1,5 +1,6 @@
-export default function createBookCard({ title, author, pages, status }) {
+export default function createBookCard({ id, title, author, pages, status }) {
     const book = document.createElement("div");
+    book.id = id;
     book.className = "book";
 
     // title
@@ -33,11 +34,13 @@ export default function createBookCard({ title, author, pages, status }) {
     // delete
     const deleteButton = document.createElement("button");
     deleteButton.textContent = "Delete";
+    deleteButton.id = "delete";
     bookActionsContainer.appendChild(deleteButton);
 
     // edit
     const editButton = document.createElement("button");
     editButton.textContent = "Edit";
+    editButton.id = "edit";
     bookActionsContainer.appendChild(editButton);
 
     book.appendChild(bookActionsContainer);

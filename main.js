@@ -47,6 +47,18 @@ document.querySelector("#addBook").addEventListener("click", (e) => {
     renderApp();
 });
 
+booksContainer.addEventListener("click", (e) => {
+    const card = e.target.contains("id");
+
+    if (e.target.id === "edit") {
+        console.log(e.target);
+    }
+
+    if (e.target.id === "delete") {
+        console.log(card);
+    }
+});
+
 // handle new book
 // handle edit book
 
