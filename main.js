@@ -1,3 +1,5 @@
+import createBook from "./Book.js";
+
 class Library {
     constructor() {
         this.library = [];
@@ -32,7 +34,7 @@ class Library {
         this.dialogManager.init();
 
         this.addForm.onSubmit((data) => {
-            const book = new Book(
+            const book = createBook(
                 data.title,
                 data.author,
                 data.pages,
@@ -90,16 +92,6 @@ class Library {
 
             this.bookRenderer.renderAllBooks(this.library);
         });
-    }
-}
-
-class Book {
-    constructor(title, author, pages, status) {
-        this.id = crypto.randomUUID();
-        this.title = title;
-        this.author = author;
-        this.pages = pages;
-        this.status = status;
     }
 }
 
