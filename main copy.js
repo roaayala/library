@@ -218,16 +218,6 @@ class BookRenderer {
         });
     }
 
-    showEmptyMessage() {
-        const emptyMessage = document.createElement("div");
-
-        emptyMessage.classList.add("book-card-empty");
-
-        emptyMessage.textContent = `There's no book being added.`;
-
-        this.booksContainer.appendChild(emptyMessage);
-    }
-
     clearShelf() {
         this.booksContainer.innerHTML = "";
     }
