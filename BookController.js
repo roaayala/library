@@ -1,9 +1,9 @@
-import createBook from "./Book";
+import createBook from "./Book.js";
 
 const addBook = (libraryArray, dataObject) => {
     const { title, author, pages, status } = dataObject;
 
-    const newBook = createBook(title, author, pages, status);
+    const newBook = createBook({ title, author, pages, status });
 
     return [...libraryArray, newBook];
 };
