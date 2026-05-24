@@ -1,6 +1,6 @@
-import createBookCard from "./BookCard.js";
-import { BookController } from "./BookController.js";
-import createEmptyMessage from "./EmptyMessage.js";
+import createBookCard from "./components/BookCard.js";
+import { BookController } from "./controllers/BookController.js";
+import createEmptyMessage from "./components/EmptyMessage.js";
 import { toggleDialog } from "./utils/dialogManager.js";
 import { getFormData, resetForm, setFormData } from "./utils/formHandler.js";
 
