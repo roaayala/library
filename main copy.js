@@ -1,10 +1,5 @@
 import createBook from "./Book.js";
-import { BookController } from "./BookController.js";
-
-let library = [];
-
-const booksContainer = document.querySelector(".books");
-
+i;
 class Library {
     constructor() {
         this.library = [];
@@ -193,78 +188,6 @@ class DialogManager {
 class BookRenderer {
     constructor(container) {
         this.booksContainer = document.querySelector(container);
-    }
-
-    createTitle(title) {
-        const bookTitle = document.createElement("h2");
-        bookTitle.classList.add("book-title");
-        bookTitle.textContent = title;
-
-        return bookTitle;
-    }
-
-    createAuthor(author) {
-        const bookAuthor = document.createElement("h3");
-        bookAuthor.classList.add("book-author");
-        bookAuthor.textContent = author;
-
-        return bookAuthor;
-    }
-
-    createPages(pages) {
-        const bookPages = document.createElement("p");
-        bookPages.classList.add("book-pages");
-        bookPages.textContent = `${pages} pages`;
-
-        return bookPages;
-    }
-
-    createStatus(status) {
-        const bookStatus = document.createElement("span");
-        bookStatus.classList.add("book-read-status");
-        bookStatus.textContent = status;
-
-        return bookStatus;
-    }
-
-    createButton(style, text) {
-        const actionButton = document.createElement("button");
-
-        actionButton.classList.add(style);
-
-        actionButton.textContent = text;
-
-        return actionButton;
-    }
-
-    createBookActionsContainer() {
-        const bookActionsContainer = document.createElement("div");
-
-        bookActionsContainer.classList.add("book-card-actions");
-
-        bookActionsContainer.appendChild(
-            this.createButton("action-edit", "Edit"),
-        );
-
-        bookActionsContainer.appendChild(
-            this.createButton("action-delete", "Delete"),
-        );
-
-        return bookActionsContainer;
-    }
-
-    book(bookObject) {
-        const book = document.createElement("div");
-        book.classList.add("book");
-        book.setAttribute("book-id", bookObject.id);
-
-        book.appendChild(this.createAuthor(bookObject.author));
-        book.appendChild(this.createTitle(bookObject.title));
-        book.appendChild(this.createPages(bookObject.pages));
-        book.appendChild(this.createStatus(bookObject.status));
-        book.appendChild(this.createBookActionsContainer());
-
-        return book;
     }
 
     renderBook(bookObject) {
