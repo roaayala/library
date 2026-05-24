@@ -3,26 +3,26 @@
 *,
 *::before,
 *::after {
-	box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 /* 2. Remove default margin */
 *:not(dialog) {
-	margin: 0;
+    margin: 0;
 }
 
 /* 3. Enable keyword animations */
 @media (prefers-reduced-motion: no-preference) {
-	html {
-		interpolate-size: allow-keywords;
-	}
+    html {
+        interpolate-size: allow-keywords;
+    }
 }
 
 body {
-	/* 4. Add accessible line-height */
-	line-height: 1.5;
-	/* 5. Improve text rendering */
-	-webkit-font-smoothing: antialiased;
+    /* 4. Add accessible line-height */
+    line-height: 1.5;
+    /* 5. Improve text rendering */
+    -webkit-font-smoothing: antialiased;
 }
 
 /* 6. Improve media defaults */
@@ -31,8 +31,8 @@ picture,
 video,
 canvas,
 svg {
-	display: block;
-	max-width: 100%;
+    display: block;
+    max-width: 100%;
 }
 
 /* 7. Inherit fonts for form controls */
@@ -40,7 +40,7 @@ input,
 button,
 textarea,
 select {
-	font: inherit;
+    font: inherit;
 }
 
 /* 8. Avoid text overflows */
@@ -51,12 +51,12 @@ h3,
 h4,
 h5,
 h6 {
-	overflow-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 /* 9. Improve line wrapping */
 p {
-	text-wrap: pretty;
+    text-wrap: pretty;
 }
 h1,
 h2,
@@ -64,7 +64,7 @@ h3,
 h4,
 h5,
 h6 {
-	text-wrap: balance;
+    text-wrap: balance;
 }
 
 /*
@@ -72,135 +72,135 @@ h6 {
 */
 #root,
 #__next {
-	isolation: isolate;
+    isolation: isolate;
 }
 
 /* BASE */
 
 :root {
-	--primaryColor: oklch(14.5% 0 0);
-	--secondaryColor: oklch(98.5% 0 0);
-	--accentColor: oklch(62.3% 0.214 259.815);
+    --primaryColor: oklch(14.5% 0 0);
+    --secondaryColor: oklch(98.5% 0 0);
+    --accentColor: oklch(62.3% 0.214 259.815);
 }
 
 body {
-	font-family: sans-serif;
-	color: var(--primaryColor);
+    font-family: sans-serif;
+    color: var(--primaryColor);
 }
 
 .container {
-	padding: 0 1rem;
+    padding: 0 1rem;
 }
 
 @media (min-width: 640px) {
-	.container {
-		padding: 0;
-		max-width: 37.5rem;
-		margin: 0 auto;
-	}
+    .container {
+        padding: 0;
+        max-width: 37.5rem;
+        margin: 0 auto;
+    }
 }
 
 @media (min-width: 768px) {
-	.container {
-		max-width: 45rem;
-	}
+    .container {
+        max-width: 45rem;
+    }
 }
 
 @media (min-width: 1024px) {
-	.container {
-		max-width: 60rem;
-	}
+    .container {
+        max-width: 60rem;
+    }
 }
 
 button {
-	cursor: pointer;
+    cursor: pointer;
 }
 
 .btn {
-	font-weight: 700;
-	background-color: var(--accentColor);
-	color: var(--secondaryColor);
-	border: 1px solid var(--accentColor);
-	display: inline-block;
-	padding: 0.125rem 0.75rem;
+    font-weight: 700;
+    background-color: var(--accentColor);
+    color: var(--secondaryColor);
+    border: 1px solid var(--accentColor);
+    display: inline-block;
+    padding: 0.125rem 0.75rem;
 }
 
 /* DIALOG */
 dialog {
-	margin: 0;
+    margin: 0;
 }
 
 .dialog {
-	position: fixed;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	max-width: 30rem;
-	min-width: 20rem;
-	padding: 2rem;
-	border: none;
-	border-radius: 8px;
-	box-shadow:
-		rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em,
-		rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em,
-		rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 30rem;
+    min-width: 20rem;
+    padding: 2rem;
+    border: none;
+    border-radius: 8px;
+    box-shadow:
+        rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em,
+        rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em,
+        rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
 }
 
 .dialog::backdrop {
-	background-color: hsl(250, 100%, 50%, 0.25);
+    background-color: hsl(250, 100%, 50%, 0.25);
 }
 
 .form {
 }
 
 .form-row {
-	display: flex;
-	flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
 .form-row:not(:last-child) {
-	margin-bottom: 1rem;
+    margin-bottom: 1rem;
 }
 
 .form-row input {
-	padding: 0.25rem 0.5rem;
+    padding: 0.25rem 0.5rem;
 }
 
 .form select {
-	padding: 0.25rem 0.5rem;
+    padding: 0.25rem 0.5rem;
 }
 
 /* HEADER */
 header {
-	padding-top: 1rem;
-	padding-bottom: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
 
-	box-shadow:
-		rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em,
-		rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em,
-		rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+    box-shadow:
+        rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em,
+        rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em,
+        rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
 }
 
 .header-title {
-	display: flex;
+    display: flex;
 }
 
 header h1 {
-	margin-right: auto;
+    margin-right: auto;
 }
 
 /* BOOKS */
 .books {
-	padding: 2rem 0;
-	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
-	gap: 2rem;
+    padding: 2rem 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: 2rem;
 }
 
 .book-title {
-	font-size: 1.25rem;
+    font-size: 1.25rem;
 }
 
 .book-author {
-	font-size: 1rem;
+    font-size: 1rem;
 }
