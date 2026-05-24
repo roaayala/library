@@ -2,9 +2,6 @@ import createBook from "./Book.js";
 i;
 class Library {
     constructor() {
-        this.library = [];
-        this.editTargetId = null;
-
         this.dialogManager = new DialogManager();
 
         this.addForm = new FormHandler(
@@ -216,10 +213,6 @@ class BookRenderer {
                 func(id);
             }
         });
-    }
-
-    clearShelf() {
-        this.booksContainer.innerHTML = "";
     }
 }
 
