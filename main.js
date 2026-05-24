@@ -48,14 +48,12 @@ document.querySelector("#addBook").addEventListener("click", (e) => {
 });
 
 booksContainer.addEventListener("click", (e) => {
-    const card = e.target.contains("id");
+    const card = e.target.closest(".book");
+    const targetId = card.getAttribute("data-book-id");
 
-    if (e.target.id === "edit") {
-        console.log(e.target);
-    }
-
-    if (e.target.id === "delete") {
-        console.log(card);
+    if (e.target.closest(".delete")) {
+        library = BookController.removeBook(library, targetId);
+        renderApp();
     }
 });
 
