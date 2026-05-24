@@ -48,6 +48,27 @@ document.querySelector("#addBook").addEventListener("click", (e) => {
     renderApp();
 });
 
+// save edit book
+document.querySelector("#editBook").addEventListener("click", (e) => {
+    e.preventDefault();
+
+    const editedBook = getFormData(editFormSelectors);
+
+    library = BookController.editBook(library, activeBook, editedBook);
+
+    activeBook = null;
+
+    toggleDialog("#editBookDialog", "close");
+    resetForm(editFormSelectors);
+    renderApp();
+});
+
+// cancel edit book
+document.querySelector("#cancelEditBook").addEventListener("click", () => {
+    toggleDialog("#editBookDialog", "close");
+    resetForm(editFormSelectors);
+});
+
 booksContainer.addEventListener("click", (e) => {
     const card = e.target.closest(".book");
 
@@ -57,25 +78,22 @@ booksContainer.addEventListener("click", (e) => {
 
     const targetId = card.getAttribute("data-book-id");
 
+    // delete book
     if (e.target.closest(".delete")) {
         library = BookController.removeBook(library, targetId);
         renderApp();
     }
 
+    // show edit book dialog
     if (e.target.closest(".edit")) {
         activeBook = targetId;
 
         const book = library.find((book) => book.id === targetId);
-
-        console.log(book);
         setFormData({ selector: editFormSelectors, data: book });
 
         toggleDialog("#editBookDialog", "open");
     }
 });
-
-// handle new book
-// handle edit book
 
 const renderApp = () => {
     booksContainer.innerHTML = "";
