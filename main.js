@@ -7,6 +7,8 @@ import { getFormData, resetForm, setFormData } from "./utils/formHandler.js";
 let library = [];
 let activeBook = null;
 
+const booksContainer = document.querySelector(".books");
+
 const addFormSelectors = {
     title: "#bookTitle",
     author: "#bookAuthor",
@@ -14,14 +16,20 @@ const addFormSelectors = {
     status: "#bookStatus",
 };
 
+document
+    .querySelector(addFormSelectors.title)
+    .addEventListener("input", (e) => {
+        if (e.target.value.trim("").length < 1) {
+            e.target.style.backgroundColor = "salmon";
+        }
+    });
+
 const editFormSelectors = {
     title: "#editBookTitle",
     author: "#editBookAuthor",
     pages: "#editBookPages",
     status: "#editBookStatus",
 };
-
-const booksContainer = document.querySelector(".books");
 
 // show add book dialog
 document.querySelector("#showAddBookDialog").addEventListener("click", () => {
