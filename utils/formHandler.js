@@ -13,3 +13,13 @@ export function getFormData({ title, author, pages, status }) {
         status: document.querySelector(status).value,
     };
 }
+
+export function setFormData({
+    selector = { title, author, pages, status },
+    data = { title, author, pages, status },
+}) {
+    document.querySelector(selector.title).value = data.title;
+    document.querySelector(selector.author).value = data.author;
+    document.querySelector(selector.pages).value = data.pages;
+    document.querySelector(selector.status).value = data.status;
+}
