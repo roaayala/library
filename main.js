@@ -1,307 +1,141 @@
-class Library {
-	constructor() {
-		this.library = [];
-		this.editTargetId = null;
-
-		this.dialogManager = new DialogManager();
-
-		this.addForm = new FormHandler(
-			'#bookTitle',
-			'#bookAuthor',
-			'#bookPages',
-			'#bookStatus',
-			'#addBook',
-			'#cancelAddBook',
-		);
-
-		this.editForm = new FormHandler(
-			'#editBookTitle',
-			'#editBookAuthor',
-			'#editBookPages',
-			'#editBookStatus',
-			'#editBook',
-			'#cancelEditBook',
-		);
-
-		this.bookRenderer = new BookRenderer('.books');
-
-		this.init();
-	}
-
-	init() {
-		this.dialogManager.init();
-
-		this.addForm.onSubmit((data) => {
-			const book = new Book(data.title, data.author, data.pages, data.status);
-
-			this.library.push(book);
-
-			this.dialogManager.closeAddDialog();
-
-			this.bookRenderer.renderAllBooks(this.library);
-		});
-
-		this.addForm.onCancel(() => {
-			this.dialogManager.closeAddDialog();
-			this.addForm.resetFormInput();
-		});
-
-		this.editForm.onSubmit((data) => {
-			const oldBook = this.library.find(
-				(book) => book.id === this.editTargetId,
-			);
-
-			oldBook.title = data.title;
-			oldBook.author = data.author;
-			oldBook.pages = data.pages;
-			oldBook.status = data.status;
-
-			this.editTargetId = null;
-
-			this.dialogManager.closeEditDialog();
-			this.bookRenderer.renderAllBooks(this.library);
-		});
-
-		this.editForm.onCancel(() => {
-			this.dialogManager.closeEditDialog();
-			this.editForm.resetFormInput();
-		});
-
-		this.bookRenderer.renderAllBooks(this.library);
-
-		this.bookRenderer.onActionClick('action-edit', (targetId) => {
-			const oldBook = this.library.find((book) => book.id === targetId);
-
-			this.editTargetId = targetId;
-
-			this.editForm.setFormData(oldBook);
-
-			this.dialogManager.openEditDialog();
-		});
-
-		this.bookRenderer.onActionClick('action-delete', (targetId) => {
-			// exclude book with targeted id
-			this.library = this.library.filter((book) => book.id !== targetId);
-
-			this.bookRenderer.renderAllBooks(this.library);
-		});
-	}
-}
-
-class Book {
-	constructor(title, author, pages, status) {
-		this.id = crypto.randomUUID();
-		this.title = title;
-		this.author = author;
-		this.pages = pages;
-		this.status = status;
-	}
-}
-
-class FormHandler {
-	constructor(
-		inputTitle,
-		inputAuthor,
-		inputPages,
-		inputStatus,
-		submitButton,
-		hideButton,
-	) {
-		this.inputTitle = document.querySelector(inputTitle);
-		this.inputAuthor = document.querySelector(inputAuthor);
-		this.inputPages = document.querySelector(inputPages);
-		this.inputStatus = document.querySelector(inputStatus);
-
-		this.submitButton = document.querySelector(submitButton);
-		this.hideDialog = document.querySelector(hideButton);
-	}
-
-	setFormData(oldBookObject) {
-		this.inputTitle.value = oldBookObject.title;
-
-		this.inputAuthor.value = oldBookObject.author;
-
-		this.inputPages.value = oldBookObject.pages;
-
-		this.inputStatus.value = oldBookObject.status;
-	}
-
-	getFormData() {
-		return {
-			title: this.inputTitle.value,
-			author: this.inputAuthor.value,
-			pages: this.inputPages.value,
-			status: this.inputStatus.value,
-		};
-	}
-
-	onSubmit(func) {
-		this.submitButton.addEventListener('click', (e) => {
-			e.preventDefault();
-
-			const data = this.getFormData();
-
-			func(data);
-
-			this.resetFormInput();
-		});
-	}
-
-	onCancel(func) {
-		this.hideDialog.addEventListener('click', () => {
-			func();
-		});
-	}
-
-	resetFormInput() {
-		this.inputTitle.value = '';
-		this.inputAuthor.value = '';
-		this.inputPages.value = '';
-		this.inputStatus.value = 'waiting';
-	}
-}
-
-class DialogManager {
-	constructor() {
-		this.addDialog = document.querySelector('#addBookDialog');
-		this.showAddDialog = document.querySelector('#showAddBookDialog');
-
-		this.editDialog = document.querySelector('#editBookDialog');
-	}
-
-	init() {
-		this.showAddDialog.addEventListener('click', () => {
-			this.addDialog.showModal();
-		});
-	}
-
-	openEditDialog() {
-		this.editDialog.showModal();
-	}
-
-	closeEditDialog() {
-		this.editDialog.close();
-	}
-
-	closeAddDialog() {
-		this.addDialog.close();
-	}
-}
-
-class BookRenderer {
-	constructor(container) {
-		this.booksContainer = document.querySelector(container);
-	}
-
-	createTitle(title) {
-		const bookTitle = document.createElement('h2');
-		bookTitle.classList.add('book-title');
-		bookTitle.textContent = title;
-
-		return bookTitle;
-	}
-
-	createAuthor(author) {
-		const bookAuthor = document.createElement('h3');
-		bookAuthor.classList.add('book-author');
-		bookAuthor.textContent = author;
-
-		return bookAuthor;
-	}
-
-	createPages(pages) {
-		const bookPages = document.createElement('p');
-		bookPages.classList.add('book-pages');
-		bookPages.textContent = `${pages} pages`;
-
-		return bookPages;
-	}
-
-	createStatus(status) {
-		const bookStatus = document.createElement('span');
-		bookStatus.classList.add('book-read-status');
-		bookStatus.textContent = status;
-
-		return bookStatus;
-	}
-
-	createButton(style, text) {
-		const actionButton = document.createElement('button');
-
-		actionButton.classList.add(style);
-
-		actionButton.textContent = text;
-
-		return actionButton;
-	}
-
-	createBookActionsContainer() {
-		const bookActionsContainer = document.createElement('div');
-
-		bookActionsContainer.classList.add('book-card-actions');
-
-		bookActionsContainer.appendChild(this.createButton('action-edit', 'Edit'));
-
-		bookActionsContainer.appendChild(
-			this.createButton('action-delete', 'Delete'),
-		);
-
-		return bookActionsContainer;
-	}
-
-	book(bookObject) {
-		const book = document.createElement('div');
-		book.classList.add('book');
-		book.setAttribute('book-id', bookObject.id);
-
-		book.appendChild(this.createAuthor(bookObject.author));
-		book.appendChild(this.createTitle(bookObject.title));
-		book.appendChild(this.createPages(bookObject.pages));
-		book.appendChild(this.createStatus(bookObject.status));
-		book.appendChild(this.createBookActionsContainer());
-
-		return book;
-	}
-
-	renderBook(bookObject) {
-		this.booksContainer.appendChild(this.book(bookObject));
-	}
-
-	renderAllBooks(libraryArray) {
-		this.clearShelf();
-
-		if (libraryArray.length === 0) {
-			this.showEmptyMessage();
-			return;
-		}
-
-		libraryArray.forEach((book) => {
-			this.renderBook(book);
-		});
-	}
-
-	onActionClick(targetClassName, func) {
-		this.booksContainer.addEventListener('click', (e) => {
-			if (e.target.classList.contains(targetClassName)) {
-				const id = e.target.closest('[book-id]').getAttribute('book-id');
-				func(id);
-			}
-		});
-	}
-
-	showEmptyMessage() {
-		const emptyMessage = document.createElement('div');
-
-		emptyMessage.classList.add('book-card-empty');
-
-		emptyMessage.textContent = `There's no book being added.`;
-
-		this.booksContainer.appendChild(emptyMessage);
-	}
-
-	clearShelf() {
-		this.booksContainer.innerHTML = '';
-	}
-}
-
-const app = new Library();
+import createBookCard from "./components/BookCard.js";
+import { BookController } from "./controllers/BookController.js";
+import createEmptyMessage from "./components/EmptyMessage.js";
+import { toggleDialog } from "./utils/dialogManager.js";
+import { getFormData, resetForm, setFormData } from "./utils/formHandler.js";
+
+let library = [];
+let activeBook = null;
+
+const booksContainer = document.querySelector(".books");
+
+const addFormSelectors = {
+  title: "#bookTitle",
+  author: "#bookAuthor",
+  pages: "#bookPages",
+  status: "#bookStatus",
+};
+
+document.querySelector(addFormSelectors.title).addEventListener("blur", (e) => {
+  e.target.value = e.target.value.trim();
+});
+
+document
+  .querySelector(addFormSelectors.author)
+  .addEventListener("blur", (e) => {
+    e.target.value = e.target.value.trim();
+  });
+
+const editFormSelectors = {
+  title: "#editBookTitle",
+  author: "#editBookAuthor",
+  pages: "#editBookPages",
+  status: "#editBookStatus",
+};
+
+document
+  .querySelector(editFormSelectors.title)
+  .addEventListener("blur", (e) => {
+    e.target.value = e.target.value.trim();
+  });
+
+document
+  .querySelector(editFormSelectors.author)
+  .addEventListener("blur", (e) => {
+    e.target.value = e.target.value.trim();
+  });
+
+// show add book dialog
+document.querySelector("#showAddBookDialog").addEventListener("click", () => {
+  toggleDialog("#addBookDialog", "open");
+});
+
+// close add book dialog
+document.querySelector("#cancelAddBook").addEventListener("click", () => {
+  toggleDialog("#addBookDialog", "close");
+  resetForm(addFormSelectors);
+});
+
+// save book
+document.querySelector("#addBook").addEventListener("click", (e) => {
+  const addDialog = document.querySelector("#addBookDialog form");
+
+  if (!addDialog.reportValidity()) return;
+
+  e.preventDefault();
+
+  // get form data
+  const newBook = getFormData(addFormSelectors);
+  library = BookController.addBook(library, newBook);
+
+  toggleDialog("#addBookDialog", "close");
+  resetForm(addFormSelectors);
+
+  renderApp();
+});
+
+// save edit book
+document.querySelector("#editBook").addEventListener("click", (e) => {
+  const editDialog = document.querySelector("#editBookDialog form");
+
+  if (!editDialog.reportValidity()) return;
+
+  e.preventDefault();
+
+  const editedBook = getFormData(editFormSelectors);
+
+  library = BookController.editBook(library, activeBook, editedBook);
+
+  activeBook = null;
+
+  toggleDialog("#editBookDialog", "close");
+  resetForm(editFormSelectors);
+  renderApp();
+});
+
+// cancel edit book
+document.querySelector("#cancelEditBook").addEventListener("click", () => {
+  toggleDialog("#editBookDialog", "close");
+  resetForm(editFormSelectors);
+});
+
+booksContainer.addEventListener("click", (e) => {
+  const card = e.target.closest(".book");
+
+  if (!card) {
+    return;
+  }
+
+  const targetId = card.getAttribute("data-book-id");
+
+  // delete book
+  if (e.target.closest(".delete")) {
+    library = BookController.removeBook(library, targetId);
+    renderApp();
+  }
+
+  // show edit book dialog
+  if (e.target.closest(".edit")) {
+    activeBook = targetId;
+
+    const book = library.find((book) => book.id === targetId);
+    setFormData({ selector: editFormSelectors, data: book });
+
+    toggleDialog("#editBookDialog", "open");
+  }
+});
+
+const renderApp = () => {
+  booksContainer.innerHTML = "";
+
+  if (library.length === 0) {
+    booksContainer.appendChild(createEmptyMessage());
+    return;
+  }
+
+  library.forEach((book) => {
+    booksContainer.appendChild(createBookCard(book));
+  });
+};
+
+renderApp();

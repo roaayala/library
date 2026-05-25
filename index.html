@@ -1,111 +1,138 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Library</title>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Library</title>
 
-		<link rel="stylesheet" href="./style.css" />
-	</head>
-	<body>
-		<dialog class="dialog" id="addBookDialog">
-			<form action="#" method="post" class="form">
-				<div class="form-row">
-					<label for="bookTitle">Title</label>
-					<input
-						type="text"
-						id="bookTitle"
-						name="bookTitle"
-						placeholder="Book title"
-					/>
-				</div>
+        <link rel="stylesheet" href="./style.css" />
+    </head>
+    <body>
+        <dialog class="dialog" id="addBookDialog">
+            <form action="#" method="post" class="form">
+                <div class="form-row">
+                    <label for="bookTitle">Title</label>
+                    <input
+                        type="text"
+                        id="bookTitle"
+                        name="bookTitle"
+                        placeholder="Title"
+                        required
+                    />
+                </div>
 
-				<div class="form-row">
-					<label for="bookAuthor">Author</label>
-					<input
-						type="text"
-						id="bookAuthor"
-						name="bookAuthor"
-						placeholder="Book author"
-					/>
-				</div>
+                <div class="form-row">
+                    <label for="bookAuthor">Author</label>
+                    <input
+                        type="text"
+                        id="bookAuthor"
+                        name="bookAuthor"
+                        placeholder="Author"
+                    />
+                </div>
 
-				<div class="form-row">
-					<label for="bookPages">Total pages</label>
-					<input
-						type="number"
-						id="bookPages"
-						name="bookPages"
-						placeholder="Book pages"
-					/>
-				</div>
+                <div class="form-row">
+                    <label for="bookPages">Total pages</label>
+                    <input
+                        type="number"
+                        id="bookPages"
+                        name="bookPages"
+                        placeholder="Pages"
+                    />
+                </div>
 
-				<div class="form-row read-status">
-					<label for="bookStatus">Status</label>
-					<select name="bookStatus" id="bookStatus">
-						<option value="waiting">Waiting</option>
-						<option value="reading">Reading</option>
-						<option value="finish">Finish</option>
-					</select>
-				</div>
+                <div class="form-row read-status">
+                    <label for="bookStatus">Status</label>
+                    <select name="bookStatus" id="bookStatus">
+                        <option value="waiting">Waiting</option>
+                        <option value="reading">Reading</option>
+                        <option value="finish">Finish</option>
+                    </select>
+                </div>
 
-				<div class="form-row">
-					<div class="buttons">
-						<button type="submit" class="btn" id="addBook">Add Book</button>
-						<button type="button" class="btn" id="cancelAddBook">Cancel</button>
-					</div>
-				</div>
-			</form>
-		</dialog>
+                <div class="form-row">
+                    <div class="buttons">
+                        <button type="submit" class="btn" id="addBook">
+                            Add Book
+                        </button>
+                        <button type="button" class="btn" id="cancelAddBook">
+                            Cancel
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </dialog>
 
-		<dialog class="dialog" id="editBookDialog">
-			<form action="#" method="post" class="form">
-				<div class="form-row">
-					<label for="editBookTitle">Title</label>
-					<input type="text" id="editBookTitle" name="editBookTitle" />
-				</div>
+        <dialog class="dialog" id="editBookDialog">
+            <form action="#" method="post" class="form">
+                <div class="form-row">
+                    <label for="editBookTitle">Title</label>
+                    <input
+                        type="text"
+                        id="editBookTitle"
+                        name="editBookTitle"
+                        placeholder="Title"
+                        required
+                    />
+                </div>
 
-				<div class="form-row">
-					<label for="editBookAuthor">Author</label>
-					<input type="text" id="editBookAuthor" name="editBookAuthor" />
-				</div>
+                <div class="form-row">
+                    <label for="editBookAuthor">Author</label>
+                    <input
+                        type="text"
+                        id="editBookAuthor"
+                        name="editBookAuthor"
+                        placeholder="Author"
+                    />
+                </div>
 
-				<div class="form-row">
-					<label for="editBookPages">Total pages</label>
-					<input type="number" id="editBookPages" name="editBookPages" />
-				</div>
+                <div class="form-row">
+                    <label for="editBookPages">Total pages</label>
+                    <input
+                        type="number"
+                        id="editBookPages"
+                        name="editBookPages"
+                        placeholder="Pages"
+                    />
+                </div>
 
-				<div class="form-row read-status">
-					<label for="editBookStatus">Status</label>
-					<select name="editBookStatus" id="editBookStatus">
-						<option value="waiting">Waiting</option>
-						<option value="reading">Reading</option>
-						<option value="finish">Finish</option>
-					</select>
-				</div>
+                <div class="form-row read-status">
+                    <label for="editBookStatus">Status</label>
+                    <select name="editBookStatus" id="editBookStatus">
+                        <option value="waiting">Waiting</option>
+                        <option value="reading">Reading</option>
+                        <option value="finish">Finish</option>
+                    </select>
+                </div>
 
-				<div class="form-row">
-					<div class="buttons">
-						<button type="submit" class="btn" id="editBook">Edit Book</button>
-						<button type="button" class="btn" id="cancelEditBook">
-							Cancel
-						</button>
-					</div>
-				</div>
-			</form>
-		</dialog>
+                <div class="form-row">
+                    <div class="buttons">
+                        <button type="submit" class="btn" id="editBook">
+                            Edit Book
+                        </button>
+                        <button type="button" class="btn" id="cancelEditBook">
+                            Cancel
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </dialog>
 
-		<header>
-			<div class="container">
-				<div class="header-title">
-					<h1>My Books</h1>
-					<button class="btn" id="showAddBookDialog">Add New Book</button>
-				</div>
-			</div>
-		</header>
+        <header>
+            <div class="container">
+                <div class="header-title">
+                    <h1>My Books</h1>
+                    <button class="btn" id="showAddBookDialog">
+                        Add New Book
+                    </button>
+                </div>
+            </div>
+        </header>
 
-		<div class="container"><main class="books"></main></div>
+        <div class="container">
+            <main class="books"></main>
+        </div>
 
-		<script src="./main.js"></script>
-	</body>
+        <script src="./main.js" type="module"></script>
+    </body>
 </html>
