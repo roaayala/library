@@ -10,110 +10,112 @@ let activeBook = null;
 const booksContainer = document.querySelector(".books");
 
 const addFormSelectors = {
-    title: "#bookTitle",
-    author: "#bookAuthor",
-    pages: "#bookPages",
-    status: "#bookStatus",
+  title: "#bookTitle",
+  author: "#bookAuthor",
+  pages: "#bookPages",
+  status: "#bookStatus",
 };
 
+document.querySelector(addFormSelectors.title).addEventListener("blur", (e) => {
+  e.target.value = e.target.value.trim();
+});
+
 document
-    .querySelector(addFormSelectors.title)
-    .addEventListener("input", (e) => {
-        if (e.target.value.trim("").length < 1) {
-            e.target.style.backgroundColor = "salmon";
-        }
-    });
+  .querySelector(addFormSelectors.author)
+  .addEventListener("blur", (e) => {
+    e.target.value = e.target.value.trim();
+  });
 
 const editFormSelectors = {
-    title: "#editBookTitle",
-    author: "#editBookAuthor",
-    pages: "#editBookPages",
-    status: "#editBookStatus",
+  title: "#editBookTitle",
+  author: "#editBookAuthor",
+  pages: "#editBookPages",
+  status: "#editBookStatus",
 };
 
 // show add book dialog
 document.querySelector("#showAddBookDialog").addEventListener("click", () => {
-    toggleDialog("#addBookDialog", "open");
+  toggleDialog("#addBookDialog", "open");
 });
 
 // close add book dialog
 document.querySelector("#cancelAddBook").addEventListener("click", () => {
-    toggleDialog("#addBookDialog", "close");
-    resetForm(addFormSelectors);
+  toggleDialog("#addBookDialog", "close");
+  resetForm(addFormSelectors);
 });
 
 // save book
 document.querySelector("#addBook").addEventListener("click", (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    // get form data
-    const newBook = getFormData(addFormSelectors);
-    library = BookController.addBook(library, newBook);
+  // get form data
+  const newBook = getFormData(addFormSelectors);
+  library = BookController.addBook(library, newBook);
 
-    toggleDialog("#addBookDialog", "close");
-    resetForm(addFormSelectors);
+  toggleDialog("#addBookDialog", "close");
+  resetForm(addFormSelectors);
 
-    renderApp();
+  renderApp();
 });
 
 // save edit book
 document.querySelector("#editBook").addEventListener("click", (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    const editedBook = getFormData(editFormSelectors);
+  const editedBook = getFormData(editFormSelectors);
 
-    library = BookController.editBook(library, activeBook, editedBook);
+  library = BookController.editBook(library, activeBook, editedBook);
 
-    activeBook = null;
+  activeBook = null;
 
-    toggleDialog("#editBookDialog", "close");
-    resetForm(editFormSelectors);
-    renderApp();
+  toggleDialog("#editBookDialog", "close");
+  resetForm(editFormSelectors);
+  renderApp();
 });
 
 // cancel edit book
 document.querySelector("#cancelEditBook").addEventListener("click", () => {
-    toggleDialog("#editBookDialog", "close");
-    resetForm(editFormSelectors);
+  toggleDialog("#editBookDialog", "close");
+  resetForm(editFormSelectors);
 });
 
 booksContainer.addEventListener("click", (e) => {
-    const card = e.target.closest(".book");
+  const card = e.target.closest(".book");
 
-    if (!card) {
-        return;
-    }
+  if (!card) {
+    return;
+  }
 
-    const targetId = card.getAttribute("data-book-id");
+  const targetId = card.getAttribute("data-book-id");
 
-    // delete book
-    if (e.target.closest(".delete")) {
-        library = BookController.removeBook(library, targetId);
-        renderApp();
-    }
+  // delete book
+  if (e.target.closest(".delete")) {
+    library = BookController.removeBook(library, targetId);
+    renderApp();
+  }
 
-    // show edit book dialog
-    if (e.target.closest(".edit")) {
-        activeBook = targetId;
+  // show edit book dialog
+  if (e.target.closest(".edit")) {
+    activeBook = targetId;
 
-        const book = library.find((book) => book.id === targetId);
-        setFormData({ selector: editFormSelectors, data: book });
+    const book = library.find((book) => book.id === targetId);
+    setFormData({ selector: editFormSelectors, data: book });
 
-        toggleDialog("#editBookDialog", "open");
-    }
+    toggleDialog("#editBookDialog", "open");
+  }
 });
 
 const renderApp = () => {
-    booksContainer.innerHTML = "";
+  booksContainer.innerHTML = "";
 
-    if (library.length === 0) {
-        booksContainer.appendChild(createEmptyMessage());
-        return;
-    }
+  if (library.length === 0) {
+    booksContainer.appendChild(createEmptyMessage());
+    return;
+  }
 
-    library.forEach((book) => {
-        booksContainer.appendChild(createBookCard(book));
-    });
+  library.forEach((book) => {
+    booksContainer.appendChild(createBookCard(book));
+  });
 };
 
 renderApp();
