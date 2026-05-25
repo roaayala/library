@@ -33,6 +33,18 @@ const editFormSelectors = {
   status: "#editBookStatus",
 };
 
+document
+  .querySelector(editFormSelectors.title)
+  .addEventListener("blur", (e) => {
+    e.target.value = e.target.value.trim();
+  });
+
+document
+  .querySelector(editFormSelectors.author)
+  .addEventListener("blur", (e) => {
+    e.target.value = e.target.value.trim();
+  });
+
 // show add book dialog
 document.querySelector("#showAddBookDialog").addEventListener("click", () => {
   toggleDialog("#addBookDialog", "open");
