@@ -17,7 +17,6 @@ const addFormSelectors = {
 };
 
 document.querySelector(addFormSelectors.title).addEventListener("blur", (e) => {
-  e.target.required = true;
   e.target.value = e.target.value.trim();
 });
 
@@ -59,6 +58,10 @@ document.querySelector("#cancelAddBook").addEventListener("click", () => {
 
 // save book
 document.querySelector("#addBook").addEventListener("click", (e) => {
+  const addDialog = document.querySelector("#addBookDialog form");
+
+  if (!addDialog.reportValidity()) return;
+
   e.preventDefault();
 
   // get form data
@@ -73,6 +76,10 @@ document.querySelector("#addBook").addEventListener("click", (e) => {
 
 // save edit book
 document.querySelector("#editBook").addEventListener("click", (e) => {
+  const editDialog = document.querySelector("#editBookDialog form");
+
+  if (!editDialog.reportValidity()) return;
+
   e.preventDefault();
 
   const editedBook = getFormData(editFormSelectors);
