@@ -17,6 +17,7 @@ const addFormSelectors = {
 };
 
 document.querySelector(addFormSelectors.title).addEventListener("blur", (e) => {
+  e.target.required = true;
   e.target.value = e.target.value.trim();
 });
 
